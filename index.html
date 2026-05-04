@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAGGG - Professional Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-gold: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-white: #ffffff;
+            --bg-light: #f8fafc;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #1e40af;
+            --secondary-color: #60a5fa;
+            --accent-gold: #fbbf24;
+            --text-dark: #f8fafc;
+            --text-light: #cbd5e1;
+            --bg-white: #0f172a;
+            --bg-light: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--text-light);
+            color: var(--text-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s 0.5s forwards;
+        }
+
+        .hero-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Sections General */
+        section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .about-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            background: var(--bg-light);
+            border-left: 4px solid var(--secondary-color);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .about-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        /* --- Symmetrical Flex Grid System --- */
+        .achievements-grid,
+        .skills-grid,
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Common Card Style */
+        .achievement-card,
+        .hobby-card,
+        .skills-category {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        /* Skill specific alignment (overrides centering to align progress bars properly) */
+        .skills-category {
+            align-items: stretch;
+            text-align: left;
+            justify-content: flex-start;
+        }
+
+        /* Card Hover Effects */
+        .achievement-card:hover,
+        .hobby-card:hover,
+        .skills-category:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            background: var(--bg-white);
+        }
+
+        [data-theme="dark"] .achievement-card:hover,
+        [data-theme="dark"] .hobby-card:hover,
+        [data-theme="dark"] .skills-category:hover {
+            background: var(--bg-light);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Icon Tweaks */
+        .achievement-icon,
+        .hobby-icon {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .hobby-icon {
+            background: linear-gradient(135deg, var(--accent-gold), var(--secondary-color));
+            font-size: 1.8rem;
+        }
+
+        .achievement-number {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--accent-gold), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        /* Skills Styling Details */
+        .skills-category h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.75rem;
+            width: 100%;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--bg-white);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        [data-theme="dark"] .skill-bar {
+            background: #0f172a;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-social {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg-light);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-link:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+            color: var(--primary-color);
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover .social-icon {
+            background: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .achievements-grid,
+            .skills-grid,
+            .hobbies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            [data-theme="dark"] .nav-links.active {
+                background: var(--bg-light);
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .achievements-grid,
+            .skills-grid,
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Jushua Ycon</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-image">
+            
+                <div class="hero-image">
+    <img src="kamote.jpg" alt="Jushua Ray Ycon O. Francisco" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+</div>
+            </div>
+            <h1>Jushua Ray Ycon O. Francisco</h1>
+            <p>Creative Problem Solver | Eager to learn more</p>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h1>Guten Tag, Guten Abend</h1>
+                <p>I’m Jushua Ray Ycon O. Francisco, a first-year student at Universidad de Dagupan (UdD). I am currently pursuing my studies with dedication and a strong desire to grow both personally and professionally. My goal is not only to build a successful career but also to make my parents proud through my hard work and achievements.</p>
+                <p style="margin-top: 1rem;">I’m currently learning how to build applications and exploring new technologies along the way.</p>
+            </div>
+            <div class="about-cards">
+                <div class="about-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <p>Graduated in Saint Collumbans Colleges - With Honors</p>
+                </div>
+                <div class="about-card">
+                    <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                    <p>1st Year Experience</p>
+                </div>
+                <div class="about-card">
+                    <h3><i class="fas fa-project-diagram"></i> Last Projects</h3>
+                    <p>1st Sem Figma editor</p>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="reveal">
+        <h2 class="section-title">Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card reveal">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <span class="achievement-number" data-target="2">0</span>
+                <h3>Won Chess School Competition</h3>
+                <p>Grade 11 and 12</p>
+            </div>
+            <div class="achievement-card reveal">
+                <div class="achievement-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <span class="achievement-number" data-target="2">0</span>
+                <h3>Certifications</h3>
+                <p>Best Cook</p>
+            </div>
+            <div class="achievement-card reveal">
+                <div class="achievement-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <span class="achievement-number" data-target="3">0</span>
+                <h3>With Honors</h3>
+                <p>Grade 10 - 12</p>
+            </div>
+        </div>
+    </section>  
+
+    <section id="skills" class="reveal">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skills-category reveal">
+                <h3><i class="fas fa-code"></i> Technical Skills</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="75"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Logical Thinking</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Time Management</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-category reveal">
+                <h3><i class="fas fa-handshake"></i> Soft Skills</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Problem Solving</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="95"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Communication</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>Teamwork</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="92"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hobbies" class="reveal">
+        <h2 class="section-title">Hobbies & Interests</h2>
+        <div class="hobbies-grid">
+            <div class="hobby-card reveal">
+                <div class="hobby-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Photography</h3>
+                <p>Capturing moments and telling stories through images</p>
+            </div>
+            <div class="hobby-card reveal">
+                <div class="hobby-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>Music</h3>
+                <p>Listening gives me chills</p>
+            </div>
+            <div class="hobby-card reveal">
+                <div class="hobby-icon">
+                    <i class="fas fa-hiking"></i>
+                </div>
+                <h3>Hiking</h3>
+                <p>Exploring nature and staying active outdoors</p>
+            </div>
+            <div class="hobby-card reveal">
+                <div class="hobby-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Reading</h3>
+                <p>Bible, tech books, sci-fi novels, and personal development</p>
+            </div>
+            <div class="hobby-card reveal">
+                <div class="hobby-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Gaming</h3>
+                <p>Strategy games and competitive esports</p>
+            </div>
+            <div class="hobby-card reveal">
+                <div class="hobby-icon">
+                    <i class="fas fa-coffee"></i>
+                </div>
+                <h3>Coffee Brewing</h3>
+                <p>I loveee my coffeeeee</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <div>
+                <h3>Let's work together!</h3>
+                <p>Ready to bring your ideas to life? Send me a message or connect on social media.</p>
+            </div>
+            <div class="contact-social">
+                <a href="mailto:gmail.com" class="social-link">
+                    <div class="social-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    Gmail
+                </a>
+                <a href="https://www.facebook.com/share/18dFy6DAdR/" target="_blank" class="social-link">
+                    <div class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    Facebook
+                </a>
+                <a href="https://www.tiktok.com/@con_sharesss?_r=1&_t=ZS-9652skRp2LU" target="_blank" class="social-link">
+                    <div class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    TikTok
+                </a>
+                <a href="https://instagram.com/yourprofile" target="_blank" class="social-link">
+                    <div class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+            const icon = themeToggle.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('theme', body.dataset.theme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.dataset.theme = savedTheme;
+        const icon = themeToggle.querySelector('i');
+        if (savedTheme === 'dark') {
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Scroll Reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Achievement Counters
+        const counters = document.querySelectorAll('.achievement-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.dataset.target);
+                    const increment = target / 100;
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            entry.target.textContent = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            entry.target.textContent = target;
+                        }
+                    };
+                    updateCounter();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Skill Progress Bars
+        const skillBars = document.querySelectorAll('.skill-progress');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.dataset.width;
+                    entry.target.style.width = width + '%';
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // Header scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = body.dataset.theme === 'dark' ? 'rgba(15, 23, 42, 0.98)' : 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = body.dataset.theme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
